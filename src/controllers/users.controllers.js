@@ -1,6 +1,6 @@
-import { usersCollection } from "../database/db";
+import { usersCollection } from "../database/db.js";
 import bcrypt from 'bcrypt';
-import { func } from "joi";
+
 
 
 export async function postSignUp(req, res) {
