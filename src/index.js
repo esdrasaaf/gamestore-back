@@ -5,6 +5,7 @@ import dotenv from "dotenv"
 dotenv.config()
 
 import usersRouters from './routes/users.routes.js'   // PAU TA DANDO NESSA LINHA AKI
+import gamesRouters from './routes/games.routes.js'
 
 const app = express()
 
@@ -12,7 +13,7 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 app.use(usersRouters)
-
+app.use(gamesRouters)
 
 const port = process.env.PORT || 5000
 
