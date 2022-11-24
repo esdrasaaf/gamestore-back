@@ -2,9 +2,6 @@ import { sessionsCollection, usersCollection } from "../database/db.js";
 import bcrypt from 'bcrypt';
 import {v4 as uuidV4 }from 'uuid';
 
-
-
-
 export async function postSignUp(req, res) {
 
     const { name, email, password, passwordConfirmation } = req.body;
@@ -14,7 +11,6 @@ export async function postSignUp(req, res) {
     }
 
     const passwordHash = bcrypt.hashSync(password, 10);
-
 
     try {
         const userExist = await usersCollection.findOne({ email });
@@ -51,7 +47,7 @@ export async function postSignIn(req,res){
         const name = userObj.name;
 
         res.send({token,name});
-    }else{
+    } else {
         res.status(404).send("Usuário não encontrado,favor conferir e-mail e senha!!!")
     }
 
