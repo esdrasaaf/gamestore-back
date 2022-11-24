@@ -18,3 +18,4 @@ const db = mongoClient.db("gameStore")
 // Export Collections
 export const usersCollection = db.collection("users")
 export const sessionsCollection = db.collection("sessions")
+export const gamesCollection = db.collection("games")
