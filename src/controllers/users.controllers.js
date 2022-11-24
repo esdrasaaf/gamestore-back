@@ -1,5 +1,7 @@
-import { usersCollection } from "../database/db.js";
+import { sessionsCollection, usersCollection } from "../database/db.js";
 import bcrypt from 'bcrypt';
+import {v4 as uuidV4 }from 'uuid';
+
 
 
 
@@ -34,3 +36,23 @@ export async function postSignUp(req, res) {
     }
 }
 
+export async function postSignIn(req,res){
+    const { email, password} = req.body;
+    const token = uuidV4();
+
+    const user = await usersCollection.findOne({email});
+
+    if(user && bcrypt.compareSync(password,user.password)){
+        await sessionsCollection.insertOne({
+            token,
+            userID:user._id,
+        })
+        const userObj = await usersCollection.findOne({email});
+        const name = userObj.name;
+
+        res.send({token,name});
+    }else{
+        res.status(404).send("Usuário não encontrado,favor conferir e-mail e senha!!!")
+    }
+
+}
