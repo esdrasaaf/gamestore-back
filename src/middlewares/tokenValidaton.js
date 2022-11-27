@@ -7,6 +7,7 @@ export default async function tokenValidationMD (req, res, next) {
     try {
         const userExist = await sessionsCollection.findOne({token})
         if (!userExist) { return res.status(401).send("Sua sessão expirou!") }
+        req.user = userExist
     } catch (error) {
          console.log(error)
          res.sendStatus(500)
