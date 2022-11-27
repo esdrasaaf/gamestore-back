@@ -14,8 +14,8 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 app.use(usersRouters)
-app.use(gamesRouters)
 app.use(cartsRouters)
+app.use(gamesRouters)
 
 const port = process.env.PORT || 5000
 
