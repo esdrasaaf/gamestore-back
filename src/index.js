@@ -7,6 +7,7 @@ dotenv.config()
 import usersRouters from './routes/users.routes.js'
 import gamesRouters from './routes/games.routes.js'
 import cartsRouters from './routes/cart.routes.js'
+import historicRouters from './routes/historic.routes.js'
 
 const app = express()
 
@@ -16,6 +17,7 @@ app.use(express.json())
 app.use(usersRouters)
 app.use(cartsRouters)
 app.use(gamesRouters)
+app.use(historicRouters)
 
 const port = process.env.PORT || 5000
 
