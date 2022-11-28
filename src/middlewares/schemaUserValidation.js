@@ -1,12 +1,4 @@
-import joi from 'joi';
-
-export const userSchema = joi.object({
-    name:joi.string().required(),
-    email:joi.string().required().min(3),
-    password:joi.string().required().min(3),
-    passwordConfirmation:joi.string().required().min(3),
-   type:joi.string().required().valid("admin","user"),
-});
+import userSchema from "../models/userSchema.model.js";
 
 export function schemaUserValidation(req,res,next){
     const {name, email, password,passwordConfirmation,type} = req.body;
