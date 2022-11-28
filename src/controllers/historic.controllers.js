@@ -1,4 +1,4 @@
-import { historicsCollection } from "../database/db.js";
+import { cartsCollection, historicsCollection } from "../database/db.js";
 
 
 export async function postHistoric (req,res){
@@ -8,14 +8,12 @@ export async function postHistoric (req,res){
             gameArray,
             userId
         };
-    
 
-        try{
+        try {
             await historicsCollection.insertOne(historicObj)
+            await cartsCollection.deleteMany({userId})
             res.status(201).send("Compra realizada com sucesso!!!")
-            
-            
-        }catch(err){
+        } catch(err) {
             console.log(err);
             res.sendStatus(500);
         }
@@ -24,10 +22,10 @@ export async function postHistoric (req,res){
 export async function getHistoric (req,res){
     const userId = req.user.userID
   
-    try{
+    try {
         const historic = await historicsCollection.find({userId}).toArray()
         res.status(200).send(historic)
-    }catch (error) {
+    } catch (error) {
         console.log(error)
         res.sendStatus(500)
     }
